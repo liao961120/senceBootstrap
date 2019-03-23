@@ -1,0 +1,10 @@
+bin
+etc
+include
+lib
+pip-selfcheck.json
+__pycache__
+share
+asbc5_corp.txt
+zhwiki_corp.txt
+zhwiki_nopunc*

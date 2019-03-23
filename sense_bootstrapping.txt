@@ -1,0 +1,10 @@
+語料： 平衡 > wiki > 新聞
+
+
+例句處理：
+        - 斷例句 > log(f_content)/log(f_func) (詞表資料) > 以頻率資料剔除 function words
+        - 斷例句 > 剔除 stop_words.csv 中詞彙 > 合併句子
+
+撈語料：
+        - 以處理過後之例句開 window size 前 6 後 6 個字作為 filter > 以此 filter 搜尋語料庫 (window size to be determined) 中符合的 context
+
