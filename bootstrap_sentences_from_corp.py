@@ -1,7 +1,7 @@
 def bootstrap(target_word, keys, corp_text, l_window=15, r_window=15, extra_width=0):
     """
     target_word: str
-    keys: A list of str
+    keys: str, or a list of str
     corp_text: A long str
     l_window, r_window: window size set to look for sentences matching `keys` in `corp_text`
     extra_width: Additional width added to `l_window` & `r_window` to the returned extracted sentences
@@ -18,16 +18,17 @@ def bootstrap(target_word, keys, corp_text, l_window=15, r_window=15, extra_widt
 def find_all_target_word_window(target, text, l_window=15, r_window=15):
     start = 0
     match_idx = []
+    text_len = len(text)
     while True:
         start = text.find(target, start)
         if start != -1:
             
             # Get a window range containing target word
             left_idx = 0 if (start - l_window) < 0 else (start - l_window)
-            right_idx = len(text) if (start + len(target) > len(text)) else (start + len(target) + r_window)
+            right_idx = text_len if (start + len(target) + r_window > text_len) else (start + len(target) + r_window)
             match_idx.append([left_idx, right_idx])
             
-            start += len(target)
+            start = right_idx + 1 if (right_idx < text_len) else text_len
         else:
             return(match_idx)
     return(match_idx)
@@ -35,7 +36,7 @@ def find_all_target_word_window(target, text, l_window=15, r_window=15):
 
 def filter_by_seed(seed_sent_keys, candidate_sent_idx, corp_text, extra_width=0):
     """
-    seed_sent_keys: a list of words obtained from the seed sentence
+    seed_sent_keys: str or a list of words obtained from the seed sentence
     candidate_sent_idx: Two-level nested list: [[l_idx, r_idx], [l_idx, r_idx], ..., [l_idx, r_idx]]
     corp_text: str
     """

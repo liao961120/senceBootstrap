@@ -2,9 +2,12 @@ bin
 etc
 include
 lib
+lib64
+pyvenv.cfg
 pip-selfcheck.json
 __pycache__
 share
 asbc5_corp.txt
 zhwiki_corp.txt
 zhwiki_nopunc*
+asbc5_corp.txt
